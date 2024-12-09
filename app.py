@@ -5,7 +5,6 @@ import locale
 app = Flask(__name__)
 app.secret_key = os.urandom(24)  
 
-
 produtos = [
     {"id": 1, "nome": "Casadinho ", "descricao": "Bambolê Leite Ninho Recheado", "preco": 20.00, "quantidade": 4, "categoria": "Doces", "imagem": "/static/imagens/bambole_ninho.jpg"},
     {"id": 2, "nome": "Casadinho ", "descricao": "Florzinha de Leite Condensado Recheada", "preco": 20.00, "quantidade": 4, "categoria": "Doces", "imagem": "/static/imagens/florzinha_recheada.jpg"},
@@ -17,22 +16,26 @@ produtos = [
     {"id": 8, "nome": "Casadinho", "descricao": "Sem Recheio de leite condensado", "preco": 20.00, "quantidade": 15, "categoria": "Biscoito", "imagem": "/static/imagens/coxinha.jpg"},
     {"id": 9, "nome": "Casadinho", "descricao": "Leite Ninho Com Recheio de Goiabada", "preco": 20.00, "quantidade": 15, "categoria": "Biscoito", "imagem": "/static/imagens/coxinha.jpg"},
     {"id": 10, "nome": "Casadinho", "descricao": "Leite Condensado", "preco": 20.00, "quantidade": 15, "categoria": "Biscoito", "imagem": "/static/imagens/coxinha.jpg"},
-    {"id": 11, "nome": "Salgadinho", "descricao": "Pimentinha de Bacon", "preco": 20.00, "quantidade": 15, "categoria": "Salgadinhos", "imagem": "/static/imagens/coxinha.jpg"},
-    {"id": 14, "nome": "Paçoca", "descricao": "Paçoca com chocolate", "preco": 22.00, "quantidade": 2, "categoria": "Doces", "imagem": "/static/imagens/paçoca.jpg"},
-    {"id": 15, "nome": "Trufas", "descricao": "Trufas Sabores Variados", "preco": 32.00, "quantidade": 8, "categoria": "Doces", "imagem": "/static/imagens/trufas.jpg"},
-    {"id": 13, "nome": "Amendoin ", "descricao": "Amendoin Crocante de Pimenta", "preco": 18.00, "quantidade": 2, "categoria": "Salgadinhos", "imagem": "/static/imagens/amendoin_pimenta.jpg"},
-    {"id": 12, "nome": "Amendoin ", "descricao": "Amendoin Crocante Churrasco", "preco": 18.00, "quantidade": 1, "categoria": "Salgadinhos", "imagem": "/static/imagens/amendoin_churrasco.jpg"},
-    {"id": 16, "nome": "Amendoin ", "descricao": "Amendoin Crocante Natural", "preco": 18.00, "quantidade": 1, "categoria": "Salgados", "imagem": "/static/imagens/amendoin_natural.jpg"},
-    {"id": 17, "nome": "Amendoin ", "descricao": "Amendoin Cebola e Salsa", "preco": 18.00, "quantidade": 2, "categoria": "Salgados", "imagem": "/static/imagens/amendoin_cebola_salsa.jpg"},
-    {"id": 18, "nome": "Amendoin ", "descricao": "Amendoin Crocante", "preco": 18.00, "quantidade": 6, "categoria": "Salgados", "imagem": "/static/imagens/crocante.jpg"},
-    {"id": 19, "nome": "Chocolate ", "descricao": "Delícias de Minas", "preco": 24.00, "quantidade": 1, "categoria": "Doces", "imagem": "/static/imagens/delicias_minas.jpg"},
-    {"id": 20, "nome": "Chocolate ", "descricao": "Delícias de Minas Choco Festa", "preco": 24.00, "quantidade": 1, "categoria": "Doces", "imagem": "/static/imagens/delicias_choco_festa.jpg"},
-    {"id": 21, "nome": "Chocolate ", "descricao": "Delícias de Minas Rosca de Brigadeiro", "preco": 24.00, "quantidade": 1, "categoria": "Doces", "imagem": "/static/imagens/delicias_rosca_brigadeiro.jpg"},
-    {"id": 22, "nome": "Chocolate ", "descricao": "Delícias de Minas Prestococo", "preco": 24.00, "quantidade": 1, "categoria": "Doces", "imagem": "/static/imagens/delicias_prestoco.jpg"},
-    {"id": 23, "nome": "Chocolate ", "descricao": "Delícias de Minas Prestigio", "preco": 24.00, "quantidade": 1, "categoria": "Doces", "imagem": "/static/imagens/delicias_prestigio.jpg"},
+    {"id": 11, "nome": "Salgadinho", "descricao": "Sabor  de Bacon", "preco": 20.00, "quantidade": 4, "categoria": "Salgadinhos", "imagem": "/static/imagens/bacon.jpg"},
+    {"id": 12, "nome": "Salgadinho", "descricao": "Sabor  de Cebola e Salsa", "preco": 20.00, "quantidade": 3, "categoria": "Salgadinhos", "imagem": "/static/imagens/cebola_salsa.jpg"},
+    {"id": 13, "nome": "Salgadinho", "descricao": "Sabor  de Picanha", "preco": 20.00, "quantidade": 6, "categoria": "Salgadinhos", "imagem": "/static/imagens/picanha.jpg"},
+    {"id": 14, "nome": "Salgadinho", "descricao": "Sabor  de Pizza", "preco": 20.00, "quantidade": 5, "categoria": "Salgadinhos", "imagem": "/static/imagens/pizza.jpg"},
+    {"id": 15, "nome": "Salgadinho", "descricao": "Sabor  de Pimenta Mexicana", "preco": 20.00, "quantidade": 6, "categoria": "Salgadinhos", "imagem": "/static/imagens/pimenta_mexicana.jpg"}, 
+    {"id": 16, "nome": "Salgadinho", "descricao": "Sabor  de Costelinha com limão", "preco": 20.00, "quantidade": 3, "categoria": "Salgadinhos", "imagem": "/static/imagens/costelinha_limao.jpg"},  
+    {"id": 17, "nome": "Paçoca", "descricao": "Paçoca com chocolate", "preco": 22.00, "quantidade": 2, "categoria": "Doces", "imagem": "/static/imagens/paçoca.jpg"},
+    {"id": 18, "nome": "Trufas", "descricao": "Trufas Sabores Variados", "preco": 32.00, "quantidade": 8, "categoria": "Doces", "imagem": "/static/imagens/trufas.jpg"},
+    {"id": 19, "nome": "Amendoin ", "descricao": "Amendoin Crocante de Pimenta", "preco": 18.00, "quantidade": 2, "categoria": "Salgadinhos", "imagem": "/static/imagens/amendoin_pimenta.jpg"},
+    {"id": 20, "nome": "Amendoin ", "descricao": "Amendoin Crocante Churrasco", "preco": 18.00, "quantidade": 1, "categoria": "Salgadinhos", "imagem": "/static/imagens/amendoin_churrasco.jpg"},
+    {"id": 21, "nome": "Amendoin ", "descricao": "Amendoin Crocante Natural", "preco": 18.00, "quantidade": 1, "categoria": "Salgados", "imagem": "/static/imagens/amendoin_natural.jpg"},
+    {"id": 22, "nome": "Amendoin ", "descricao": "Amendoin Cebola e Salsa", "preco": 18.00, "quantidade": 2, "categoria": "Salgados", "imagem": "/static/imagens/amendoin_cebola_salsa.jpg"},
+    {"id": 23, "nome": "Amendoin ", "descricao": "Amendoin Crocante", "preco": 18.00, "quantidade": 6, "categoria": "Salgados", "imagem": "/static/imagens/crocante.jpg"},
+    {"id": 24, "nome": "Chocolate ", "descricao": "Delícias de Minas", "preco": 24.00, "quantidade": 1, "categoria": "Doces", "imagem": "/static/imagens/delicias_minas.jpg"},
+    {"id": 25, "nome": "Chocolate ", "descricao": "Delícias de Minas Choco Festa", "preco": 24.00, "quantidade": 1, "categoria": "Doces", "imagem": "/static/imagens/delicias_choco_festa.jpg"},
+    {"id": 26, "nome": "Chocolate ", "descricao": "Delícias de Minas Rosca de Brigadeiro", "preco": 24.00, "quantidade": 1, "categoria": "Doces", "imagem": "/static/imagens/delicias_rosca_brigadeiro.jpg"},
+    {"id": 27, "nome": "Chocolate ", "descricao": "Delícias de Minas Prestococo", "preco": 24.00, "quantidade": 1, "categoria": "Doces", "imagem": "/static/imagens/delicias_prestoco.jpg"},
+    {"id": 28, "nome": "Chocolate ", "descricao": "Delícias de Minas Prestigio", "preco": 24.00, "quantidade": 1, "categoria": "Doces", "imagem": "/static/imagens/delicias_prestigio.jpg"},
 
 ]
-
 
 def formatar_moeda(valor):
     locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')  
