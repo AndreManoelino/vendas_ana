@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Detalhes do Produto{% endblock %}
+{% block content %}
+<h2>Detalhes do Produto</h2>
+<div class="produto-detalhes">
+    <img src="{{ produto.imagem }}" alt="{{ produto.nome }}">
+    <h3>{{ produto.nome }}</h3>
+    <p>{{ produto.descricao }}</p>
+    <p><strong>Preço:</strong> {{ formatar_moeda(produto.preco) }}</p>
+    <p><strong>Estoque disponível:</strong> {{ produto.quantidade }}</p>
+    <form action="/add_to_cart/{{ produto.id }}" method="post">
+        <button type="submit" class="btn">Adicionar ao Carrinho</button>
+    </form>
+</div>
+<a href="/" class="btn">Voltar</a>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Carrinho de compras</h2>
+
+{% if carrinho %}
+    <table>
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Preço</th>
+                <th>Quantidade no Carrinho</th>
+                <th>Total</th>
+                <th>Remover</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in carrinho %}
+            <tr>
+                <td>
+                    <img src="{{ item.imagem }}" alt="{{ item.nome }}" width="50"> <!-- Exibe a imagem do produto -->
+                    {{ item.nome }}
+                </td>
+                <td>{{ formatar_moeda(item.preco) }}</td>
+                <td>
+                    <!-- Exibe a quantidade no carrinho -->
+                    <form method="POST" action="{{ url_for('update_quantity', produto_id=item.id) }}">
+                        <input type="number" name="quantidade" value="{{ item.quantidade }}" min="1" max="{{ item.quantidade }}" required>
+                        <button type="submit">Atualizar Quantidade</button>
+                    </form>
+                </td>
+                <td>{{ formatar_moeda(item.preco * item.quantidade) }}</td> <!-- Exibe o total por item -->
+                <td>
+                    <form method="POST" action="{{ url_for('remove_from_cart', produto_id=item.id) }}">
+                        <button type="submit">Remover</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h3>Total: {{ total }}</h3>
+    <a href="{{ url_for('checkout') }}" class="btn">Finalizar Compra</a>
+{% else %}
+    <p>Carrinho vazio</p>
+{% endif %}
+
+{% endblock %}

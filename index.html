@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Produtos Disponíveis</h2>
+<div class="image-container">
+    {% for produto in produtos %}
+        <div class="image-item">
+            <!-- Imagem do Produto com evento para abrir no modal -->
+            <img src="{{ produto.imagem }}" alt="{{ produto.nome }}" data-toggle="modal" data-target="#imagemModal{{ produto.id }}">
+            <h3>{{ produto.nome }}</h3>
+            <p>{{ produto.descricao }}</p>
+            <p>Preço: {{ formatar_moeda(produto.preco) }}</p>
+            <p>Categoria: {{ produto.categoria }}</p>
+            <p>Quantidade disponível: {{ produto.quantidade }}</p>
+            {% if produto.quantidade == 0 %}
+                <p><strong>Estoque zerado</strong></p>
+            {% else %}
+                <form method="POST" action="{{ url_for('add_to_cart', produto_id=produto.id) }}">
+                    <button type="submit">Adicionar ao Carrinho</button>
+                </form>
+            {% endif %}
+        </div>
+
+        <!-- Modal de Imagem -->
+        <div class="modal fade" id="imagemModal{{ produto.id }}" tabindex="-1" role="dialog" aria-labelledby="imagemModalLabel{{ produto.id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imagemModalLabel{{ produto.id }}">{{ produto.nome }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="{{ produto.imagem }}" alt="{{ produto.nome }}" class="img-fluid">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
