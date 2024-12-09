@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Finalizar Compra{% endblock %}
+{% block content %}
+<h2>Finalizar Compra</h2>
+<form action="/checkout" method="post">
+    <label for="nome">Nome Completo:</label>
+    <input type="text" id="nome" name="nome" required>
+
+    <label for="endereco">Endereço:</label>
+    <input type="text" id="endereco" name="endereco">
+
+    <label for="forma_pagamento">Forma de Pagamento:</label>
+    <select id="forma_pagamento" name="forma_pagamento">
+        <option value="PIX">PIX</option>
+        <option value="Cartão">Cartão</option>
+        <option value="Dinheiro">Dinheiro</option>
+    </select>
+
+    <label for="entrega">Entrega:</label>
+    <select id="entrega" name="entrega">
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+    </select>
+
+    <button type="submit" class="btn">Confirmar Pedido</button>
+</form>
+{% endblock %}

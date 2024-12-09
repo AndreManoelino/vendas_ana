@@ -1,0 +1,232 @@
+/* Geral */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Garante que o body ocupe 100% da altura da tela */
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+nav {
+    margin: 1em 0;
+    text-align: center;
+}
+
+nav a {
+    margin: 0 1em;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+main {
+    margin: 2em auto;
+    width: 100%;
+    max-width: 1200px;
+    flex-grow: 1; /* Faz o conteúdo ocupar o espaço restante */
+}
+
+/* Títulos */
+h2, h3, h4 {
+    text-align: center;
+    margin-bottom: 1em;
+    text-decoration: underline; /* Sublinha os títulos */
+}
+
+/* Tabelas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2em;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 1em;
+    text-align: center;
+}
+
+table th {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Botões */
+.btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    margin: 1em 0; /* Espaçamento entre os botões */
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 80%; /* Ajusta a largura do botão */
+    margin-top: 1em; /* Espaçamento entre o conteúdo e o botão */
+    font-size: 14px; /* Ajusta o tamanho da fonte */
+    text-align: center;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Formulários */
+form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+input, select {
+    margin-bottom: 10px;
+    padding: 0.5em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+input[type="text"], select {
+    width: 100%;
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+    main {
+        width: 95%; /* Deixa uma pequena margem nas telas menores */
+    }
+
+    table, th, td {
+        font-size: 14px; /* Ajuste do tamanho da fonte em telas pequenas */
+    }
+
+    .btn, button {
+        width: 100%; /* Botões sempre ocupando a largura total */
+    }
+}
+
+/* Footer */
+footer {
+    margin-top: auto; /* Faz o footer ir para o final da tela */
+    background-color: #333;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+/* Imagens */
+/* Imagens */
+img {
+    max-width: 20%;  /* Faz a imagem ocupar a largura do seu container */
+    height: auto;     /* Mantém a proporção da imagem */
+}
+
+/* Contêiner de imagens */
+/* Contêiner de imagens */
+.image-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que as imagens se ajustem em várias linhas */
+    gap: 1em;        /* Espaço entre as imagens */
+    justify-content: center; /* Centraliza as imagens */
+}
+
+/* Ajuste das imagens para aparecerem 3 por linha */
+.image-container img {
+    width: calc(33.33% - 1em); /* Cada imagem ocupará 1/3 do container */
+    height: auto; /* Mantém a proporção da imagem */
+}
+
+/* Ajuste para os botões de adicionar ficarem menores e abaixo das imagens */
+.image-item {
+    text-align: center; /* Centraliza o conteúdo dentro de cada item */
+    width: calc(33.33% - 1em); /* Cada item vai ocupar 1/3 do contêiner */
+}
+
+.image-item .btn {
+    width: 60%; /* Botões com largura menor */
+    margin-top: 1em; /* Adiciona espaçamento entre a imagem e o botão */
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+    /* As imagens ocupam 50% da largura nas telas pequenas */
+    .image-container img {
+        width: calc(50% - 1em);
+    }
+
+    /* Os botões ocupam a largura total nas telas pequenas */
+    .image-item .btn {
+        width: 200%; /* Menor que a largura original */
+    }
+}
+
+
+/* Modal */
+.modal {
+    display: none; /* Esconde o modal por padrão */
+    position: fixed;
+    z-index: 1; /* Coloca o modal sobre outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    max-width: 80%;
+    max-height: 80%;
+    margin: auto;
+}
+
+.modal img {
+    width: 100%;
+    height: auto;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}

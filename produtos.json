@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "categoria": "biscoitos",
+        "nome": "Casadinho",
+        "descricao": "Delicioso biscoito recheado.",
+        "imagem": "/static/imagens/casadinho.jpg",
+        "preco": 5.0,
+        "quantidade": 16
+    },
+    {
+        "id": 2,
+        "categoria": "salgadinhos",
+        "nome": "Coxinha",
+        "descricao": "Coxinha tradicional de frango.",
+        "imagem": "/static/imagens/coxinha.jpg",
+        "preco":  4.50,
+        "quantidade": 11
+    },
+    {
+        "id": 3,
+        "categoria": "outros",
+        "nome": "Guarda-chuva",
+        "descricao": "Guarda-chuva resistente e colorido.",
+        "imagem": "/static/imagens/guarda_chuva.jpg",
+        "preco": 25.0,
+        "quantidade": 9
+    }
+]
