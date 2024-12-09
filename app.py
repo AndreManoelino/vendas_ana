@@ -3,9 +3,9 @@ import os
 import locale
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)  # Chave secreta para gerenciar sessões
+app.secret_key = os.urandom(24)  
 
-# Dados iniciais (mock para produtos)
+
 produtos = [
     {"id": 1, "nome": "Casadinho ", "descricao": "Bambolê Leite Ninho Recheado", "preco": 20.00, "quantidade": 4, "categoria": "Doces", "imagem": "/static/imagens/bambole_ninho.jpg"},
     {"id": 2, "nome": "Casadinho ", "descricao": "Florzinha de Leite Condensado Recheada", "preco": 20.00, "quantidade": 4, "categoria": "Doces", "imagem": "/static/imagens/florzinha_recheada.jpg"},
@@ -33,22 +33,22 @@ produtos = [
 
 ]
 
-# Define a função que formata valores em moeda
+
 def formatar_moeda(valor):
-    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')  # Define a localidade para formato brasileiro
+    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')  
     return locale.currency(valor, grouping=True)
 
 # Registra o filtro no Flask
 app.jinja_env.globals.update(formatar_moeda=formatar_moeda)
 
-# Função para calcular o total do carrinho
+
 def calcular_total():
     total = 0
     for item in session.get('carrinho', []):
         total += item['preco'] * item['quantidade']
     return total
 
-# Exemplo de uma rota para renderizar a página
+
 @app.route('/')
 def home():
     categorias = list(set(produto["categoria"] for produto in produtos))
@@ -59,21 +59,21 @@ def add_to_cart(produto_id):
     produto = next((p for p in produtos if p['id'] == produto_id), None)
     if produto and produto['quantidade'] > 0:
         if 'carrinho' not in session:
-            session['carrinho'] = []  # Cria um carrinho vazio na sessão, se não existir
+            session['carrinho'] = []  
         
-        # Verifica se o produto já está no carrinho
+     
         item_no_carrinho = next((item for item in session['carrinho'] if item['id'] == produto_id), None)
         if item_no_carrinho:
-            # Se o produto já estiver no carrinho, incrementa a quantidade
+         
             item_no_carrinho['quantidade'] += 1
         else:
-            # Se não estiver no carrinho, adiciona o produto com quantidade 1
-            produto_carrinho = produto.copy()  # Faz uma cópia do produto para o carrinho
+            
+            produto_carrinho = produto.copy()  
             produto_carrinho['quantidade'] = 1
             session['carrinho'].append(produto_carrinho)
 
-        produto['quantidade'] -= 1  # Diminui a quantidade do produto no estoque
-        session.modified = True  # Marca a sessão como modificada para garantir que a mudança seja salva
+        produto['quantidade'] -= 1  
+        session.modified = True  
     return redirect('/cart')
 
 @app.route('/update_quantity/<int:produto_id>', methods=['POST'])
@@ -82,7 +82,7 @@ def update_quantity(produto_id):
     if 'carrinho' in session:
         for item in session['carrinho']:
             if item['id'] == produto_id:
-                item['quantidade'] = quantidade  # Atualiza a quantidade do item no carrinho
+                item['quantidade'] = quantidade  
                 break
     return redirect('/cart')
 
@@ -102,7 +102,7 @@ def remove_from_cart(produto_id):
                 session['carrinho'].remove(item)
                 produto = next((p for p in produtos if p['id'] == produto_id), None)
                 if produto:
-                    produto['quantidade'] += item['quantidade']  # Aumenta a quantidade do produto no estoque
+                    produto['quantidade'] += item['quantidade']  
                 break
     return redirect('/cart')
 
@@ -116,22 +116,22 @@ def checkout():
         taxa_entrega = 7.00 if entrega == "Sim" else 0.00
         total = calcular_total() + taxa_entrega
 
-        # Armazenando os produtos antes de limpar o carrinho
+      
         carrinho_atual = session.get('carrinho', [])
 
-        # Atualiza estoques e limpa carrinho
+       
         for item in carrinho_atual:
             produto = next((p for p in produtos if p['id'] == item['id']), None)
             if produto:
-                produto['quantidade'] -= item['quantidade']  # Diminui o estoque do produto após compra
+                produto['quantidade'] -= item['quantidade'] 
         
-        # Limpa o carrinho da sessão
+       
         session['carrinho'] = []
 
-        # Monta a lista de produtos no carrinho
+       
         produtos_comprados = "\n".join([f"{item['quantidade']}x {item['nome']} - {formatar_moeda(item['preco'] * item['quantidade'])}" for item in carrinho_atual])
 
-        # Monta a mensagem com os detalhes da compra
+   
         mensagem = (
             f"Compra realizada!\n\n"
             f"Nome: {nome}\n"
@@ -143,7 +143,7 @@ def checkout():
             f"PIX: 31991070255"
         )
 
-        # Codifica a mensagem para o WhatsApp
+        
         mensagem_codificada = mensagem.replace(' ', '%20').replace('\n', '%0A')
 
         # Redireciona para o link do WhatsApp com a mensagem
@@ -153,7 +153,7 @@ def checkout():
 
 
 def calcular_total():
-    # Agora a função calcula o total a partir do carrinho armazenado na sessão
+  
     carrinho = session.get('carrinho', [])
     return sum(item['preco'] * item['quantidade'] for item in carrinho)
 
